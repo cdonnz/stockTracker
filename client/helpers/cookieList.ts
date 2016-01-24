@@ -22,7 +22,6 @@ export class CookieList {
     return (this.sArr.indexOf(stock) > -1)? true : false;
   } 
   
-  
   insert(stock: string): void {
     if(!this.isInside(stock)){
 

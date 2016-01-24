@@ -16,7 +16,7 @@ export class Tickers {
         let d = data.quote; 
 
         function insert(s){
-            
+
            let { 
                 ticker: symbol,
                 current: val,
@@ -45,36 +45,11 @@ export class Tickers {
             insert(d); 
         }
       }
-      var script = document.createElement('script');
+      let script = document.createElement('script');
       script.src  = `http://www.foxbusiness.com/ajax/quote/${tickerArr}?callback=cb`;
       document.getElementsByTagName('head')[0].appendChild(script);      
   }
-  
-  add(stock: string): void {
-
-       window.cb = (data) => {
-            console.log(data.quote,"data....");
-            var s = data.quote;
-            var symbol = s.ticker.toLowerCase();
-            var stockValue = s.current;
  
-            if(Stocks.findOne({name:symbol})){
-                Stocks.update( Stocks.findOne({name:symbol})['_id'], {$set: {val: stockValue}} );  
-            }else{
-               Stocks.insert({
-                name: symbol.toLowerCase(),
-                val: stockValue
-            });
-            }
-        }
-            
-        var script = document.createElement('script');
-        script.src  = `http://www.foxbusiness.com/ajax/quote/${stock.name}?callback=cb`;
-        document.getElementsByTagName('head')[0].appendChild(script); 
-
-  }
- 
-  
   getHistoricalData(): void {
     var API_URL = 'https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?auth_token=UnfiQceqNU642XV_ttR1';
 
@@ -82,7 +57,4 @@ export class Tickers {
         console.log(result)
     });   
   }
-  
-  
-  
 }
