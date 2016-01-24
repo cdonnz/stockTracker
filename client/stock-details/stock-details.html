@@ -1,0 +1,23 @@
+<header>
+<a [routerLink]="['StockList']">back to list</a>
+  <h2>{{stock.name}}</h2>
+ 
+  <p>{{stock.description}}</p>
+ 
+  <p>{{stock.location}}</p>
+</header>
+<form>
+<form (submit)="saveStock(stock)">
+  <label>Name</label>
+  <input type="text" [(ngModel)]="stock.name">
+  <p>{{stock.name}}</p>
+  
+  <label>Description</label>
+  <input type="text" [(ngModel)]="stock.description">
+ 
+  <label>Location</label>
+  <input type="text" [(ngModel)]="stock.location">
+ 
+  <button type="submit">Save</button>
+  <button [routerLink]="['/StockList']">Cancel</button>
+</form>

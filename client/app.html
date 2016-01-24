@@ -1,0 +1,11 @@
+<div>
+  <stocks-form></stocks-form>
+  <ul>
+    <li *ngFor="#stock of stocks">
+      {{stock.name}}
+      <p>{{stock.description}}</p>
+      <p>{{stock.location}}</p>
+      <button (click)="removeStock(stock)">X</button>
+    </li>
+  </ul>
+</div>

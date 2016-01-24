@@ -1,0 +1,5 @@
+<form [ngFormModel]="stocksForm" #f="ngForm" (submit)="addStock(f.value);">
+  <label>Type in stock symbol</label>
+  <input type="text" ngControl="name">
+  <button>Add</button>
+</form>
