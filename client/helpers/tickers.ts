@@ -8,7 +8,7 @@ export class Tickers {
   }   
   
   getStockData(){
-
+  
       var cList = new CookieList();
       var tickerArr = cList.stockListGrab().join(',');
       console.log(tickerArr,"cookieArr")
