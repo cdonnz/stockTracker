@@ -11,7 +11,6 @@ export class Tickers {
   
       var cList = new CookieList();
       var tickerArr = cList.stockListGrab().join(',');
-      console.log(tickerArr,"cookieArr")
         
       window.cb = (data) => {
         let d = data.quote; 
