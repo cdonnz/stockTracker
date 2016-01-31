@@ -1,5 +1,6 @@
 import {Stocks} from 'collections/stocks';
 import {CookieList} from 'client/helpers/cookieList'; 
+import {RGB} from 'client/helpers/RGB'; 
 
 export class Tickers {
   private sArr:string[];
@@ -26,13 +27,17 @@ export class Tickers {
             } = s;
             
             symbol = symbol.toLowerCase();
-            
+            let rgb = new RGB();
+            let rgbColor = rgb.getPerfColor(perChange);
+            console.log(rgbColor,"hex");
             if(Stocks.findOne( {name:symbol} )){
                 Stocks.update( Stocks.findOne( { name:symbol} )['_id'], { $set: { val: val}} );  
             }else{     
                Stocks.insert({
                     name: symbol,
-                    val: val
+                    val: val,
+                    rgb: rgbColor,
+                    percentChange: perChange
                });
             }                        
         }
