@@ -14,6 +14,7 @@ import {StockList} from 'client/stock-list/stock-list';
   
 import {StockDetails} from 'client/stock-details/stock-details';
 
+import {TodoService} from 'client/helpers/todo.service';
 
 @Component({
   selector: 'app'
@@ -31,4 +32,4 @@ import {StockDetails} from 'client/stock-details/stock-details';
 
 class Socially {}
 
-bootstrap(Socially, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(Socially, [ROUTER_PROVIDERS, TodoService, provide(APP_BASE_HREF, { useValue: '/' })]);

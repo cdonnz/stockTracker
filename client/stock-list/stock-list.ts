@@ -16,6 +16,8 @@ import {CookieList} from 'client/helpers/cookieList';
 
 import {Tickers} from 'client/helpers/tickers';
 
+import {TodoService} from 'client/helpers/todo.service';
+
 @Component({
     selector: 'stock-list'
 })
@@ -25,19 +27,21 @@ import {Tickers} from 'client/helpers/tickers';
     directives: [NgFor, StocksForm, Item, RouterLink]
 })
 export class StockList {
-    stocks: Mongo.Cursor<Object>;
+    stocks: {};
     foo = [];
-    constructor() {
+    constructor(public todoService: TodoService) {
         let tickers = new Tickers();
         tickers.getStockData();
         this.stocks = Stocks.find();
+        console.log(todoService);
     }
  
     removeStock(stock) {
         Stocks.remove(stock._id);
-
+        this.todoService.todos.push(stock._id);
         var cList = new CookieList();
         cList.remove(stock.name)
+         console.log(this.todoService.todos);
     }
 
 }

@@ -29,7 +29,7 @@ export class Tickers {
             symbol = symbol.toLowerCase();
             let rgb = new RGB();
             let rgbColor = rgb.getPerfColor(perChange);
-            console.log(rgbColor,"hex");
+
             if(Stocks.findOne( {name:symbol} )){
                 Stocks.update( Stocks.findOne( { name:symbol} )['_id'], { $set: { val: val}} );  
             }else{     
