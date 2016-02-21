@@ -1,7 +1,10 @@
-export class RGB {
+import {Injectable} from "angular2/core";
+@Injectable()
+
+export class HeatService {
   private sArr:string[];
   constructor() {}
-  getPerfColor(val: string): string {console.log(val,"VAL")
+  getPerfColor(val: string): string {console.log(val)
     var val = parseInt(val), n = 100, r = 233, g = 250, b = 232, pos = {r2 : 71, g2 : 226, b2 : 64},
     neg = {r2 : 207, g2 : 11, b2 : 28}, cObj = {}, p = parseInt, pos;
     val = Math.abs(val) > 40 ? 40 : val;

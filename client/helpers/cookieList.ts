@@ -7,7 +7,7 @@ export class CookieList {
           this.sArr = [];
       }
   }
-    
+ 
   stockListGrab(): string[] {
     return Cookie.get('stocksStorage').split(':');
   }       

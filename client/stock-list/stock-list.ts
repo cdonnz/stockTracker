@@ -10,38 +10,37 @@ import {StocksForm} from 'client/stock-form/stocks-form';
 
 import {Item} from 'client/item/item'; 
  
+import {Donut} from 'client/donut/donut'; 
+ 
 import {RouterLink} from 'angular2/router';
 
 import {CookieList} from 'client/helpers/cookieList'; 
 
-import {Tickers} from 'client/helpers/tickers';
+import {TickerService} from 'client/services/ticker.service';
 
-import {TodoService} from 'client/helpers/todo.service';
 
 @Component({
     selector: 'stock-list'
 })
-
+   
 @View({
     templateUrl: '/client/stock-list/stock-list.html',
-    directives: [NgFor, StocksForm, Item, RouterLink]
+    directives: [NgFor, StocksForm, Donut, RouterLink]
 })
+
 export class StockList {
     stocks: {};
-    foo = [];
-    constructor(public todoService: TodoService) {
-        let tickers = new Tickers();
+    
+    constructor(public tickers: TickerService) {
         tickers.getStockData();
         this.stocks = Stocks.find();
-        console.log(todoService);
-    }
+        
+    }   
  
     removeStock(stock) {
         Stocks.remove(stock._id);
-        this.todoService.todos.push(stock._id);
         var cList = new CookieList();
         cList.remove(stock.name)
-         console.log(this.todoService.todos);
     }
 
 }

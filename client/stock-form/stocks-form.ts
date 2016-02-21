@@ -8,7 +8,7 @@ import {Stocks} from 'collections/stocks';
 
 import {CookieList} from 'client/helpers/cookieList'; 
 
-import {Tickers} from 'client/helpers/tickers';
+import {TickerService} from 'client/services/ticker.service';
 
 @Component({
     selector: 'stocks-form'
@@ -20,8 +20,8 @@ import {Tickers} from 'client/helpers/tickers';
 
 export class StocksForm {
     stocksForm: ControlGroup;
- 
-    constructor() {
+    
+    constructor(public tickers: TickerService) {
         var fb = new FormBuilder();
         this.stocksForm = fb.group({
             name: ['']
@@ -29,9 +29,7 @@ export class StocksForm {
     }
     addStock(stock) {
         var cList = new CookieList;
-        cList.insert(stock.name)
-
-        let tickers = new Tickers();
-        tickers.getStockData();
+        cList.insert(stock.name) 
+        this.tickers.getStockData();
     }    
 }

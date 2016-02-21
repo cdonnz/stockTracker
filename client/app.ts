@@ -14,7 +14,9 @@ import {StockList} from 'client/stock-list/stock-list';
   
 import {StockDetails} from 'client/stock-details/stock-details';
 
-import {TodoService} from 'client/helpers/todo.service';
+import {TickerService} from 'client/services/ticker.service';
+
+import {HeatService} from 'client/services/heat.service';
 
 @Component({
   selector: 'app'
@@ -32,4 +34,4 @@ import {TodoService} from 'client/helpers/todo.service';
 
 class Socially {}
 
-bootstrap(Socially, [ROUTER_PROVIDERS, TodoService, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(Socially, [ROUTER_PROVIDERS, TickerService, HeatService, provide(APP_BASE_HREF, { useValue: '/' })]);

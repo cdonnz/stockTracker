@@ -1,8 +1,11 @@
+import {Injectable} from "angular2/core";
 import {Stocks} from 'collections/stocks';
 import {CookieList} from 'client/helpers/cookieList'; 
 import {RGB} from 'client/helpers/RGB'; 
 
-export class Tickers {
+@Injectable()
+
+export class TickerService {
   private sArr:string[];
   constructor() {
       this.sArr = [];
@@ -15,7 +18,7 @@ export class Tickers {
         
       window.cb = (data) => {
         let d = data.quote; 
-
+console.log("data",data)
         function insert(s){
 
            let { 
@@ -26,13 +29,13 @@ export class Tickers {
                 description: desc
             } = s;
             
-            symbol = symbol.toLowerCase();
+            symbol = symbol.toLowerCase();console.log("perf:",perChange)
             let rgb = new RGB();
             let rgbColor = rgb.getPerfColor(perChange);
 
-            if(Stocks.findOne( {name:symbol} )){
+            if(Stocks.findOne( {name:symbol} )){console.log("update")
                 Stocks.update( Stocks.findOne( { name:symbol} )['_id'], { $set: { val: val}} );  
-            }else{     
+            }else{     console.log("not update- else")
                Stocks.insert({
                     name: symbol,
                     val: val,
