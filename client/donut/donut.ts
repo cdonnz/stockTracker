@@ -149,26 +149,20 @@ export class Donut {
   
     var cList = new CookieList();
         cListArr = cList.stockListGrab();
+        console.log(cListArr,">>")
         tickers.getStockData();
         this.stocks = Stocks.find();
        
         
-console.log(cListArr,this.stocks,"<---")
- var itemData = [];
-cListArr.forEach(function(s){
-        console.log(s,Stocks.findOne( {name:s} ));
-        var sItem = Stocks.findOne( {name:s} );
-        var tempObj = {label:s, color:sItem.rgb, value: sItem.val};
-        itemData.push(tempObj);  
-});
- console.log(itemData,'itemData')       
-        var salesData=[
-            {label:"Basic", color:"#3366CC"},
-            {label:"Plus", color:"#DC3912"},
-            {label:"Lite", color:"#FF9900"},
-            {label:"Elite", color:"#109618"},
-            {label:"Delux", color:"#990099"}
-        ];
+console.log(this.stocks,"<---")
+        var itemData = [];
+        cListArr.forEach(function(s){
+                console.log(s,Stocks.findOne( {name:s} ));
+                var sItem = Stocks.findOne( {name:s} );
+                var tempObj = {label:s, color:sItem.rgb, value: sItem.val};
+                itemData.push(tempObj);  
+        });
+        console.log(itemData,'itemData')       
 
         var svg = d3.select("donut").append("svg").attr("width",700).attr("height",300);
 
@@ -182,8 +176,8 @@ cListArr.forEach(function(s){
         }
 
         function randomData(){
-            return itemData.map(function(d){ 
-                return {label:d.label, value:1000*Math.random(), color:d.color};
+            return itemData.map(function(d){ console.log('d',d.value.replace(/,/g,''));
+                return {label:d.label, value:d.value.replace(/,/g,''), color:d.color};
             });
         }
    

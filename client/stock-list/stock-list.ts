@@ -7,8 +7,6 @@ import {NgFor} from 'angular2/common';
 import {Stocks} from 'collections/stocks';
  
 import {StocksForm} from 'client/stock-form/stocks-form'; 
-
-import {Item} from 'client/item/item'; 
  
 import {Donut} from 'client/donut/donut'; 
  
@@ -30,17 +28,22 @@ import {TickerService} from 'client/services/ticker.service';
 
 export class StockList {
     stocks: {};
-    
+  
     constructor(public tickers: TickerService) {
+        //this.isOff = false;
         tickers.getStockData();
         this.stocks = Stocks.find();
-        
     }   
- 
+    
     removeStock(stock) {
         Stocks.remove(stock._id);
         var cList = new CookieList();
         cList.remove(stock.name)
+    }
+    
+    addShareBut(stock){
+        console.log(">>>>addShareBut");
+        //this.isOff = true;
     }
 
 }

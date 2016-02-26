@@ -1,6 +1,7 @@
 export class CookieList {
   private sArr:string[];
   constructor() {
+
       if(Cookie.get('stocksStorage')){
           this.sArr = Cookie.get('stocksStorage').split(':');
       }else{
@@ -9,7 +10,11 @@ export class CookieList {
   }
  
   stockListGrab(): string[] {
-    return Cookie.get('stocksStorage').split(':');
+      if(Cookie.get('stocksStorage')){
+          return Cookie.get('stocksStorage').split(':');
+      }else{
+          return [];
+      }
   }       
 
   stockListCheck(stock: string): boolean {

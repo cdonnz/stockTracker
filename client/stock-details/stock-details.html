@@ -1,16 +1,30 @@
 <header>
-<a [routerLink]="['StockList']">back to list</a>
-  <h2>{{stock.name}}</h2>
- 
-  <p>{{stock.description}}</p>
- 
-  <p>{{stock.location}}</p>
+
+
 </header>
 <form>
+    
+     <div class="stock">
+        <div class="ticker"> {{stock.name}} </div>
+        <div class="change">
+            <span class="desc"> change</span>
+            <span class="data"> {{stock.percentChange}} </span>
+        </div>
+        <div class="current">
+            <span class="desc"> current</span>
+            <span class="data"> {{stock.val}} </span>
+        </div> 
+        <div class="control-column">
+            <div class="remove">
+            <a href="#" (click)="removeStock(stock)" class="remove-stock">[-] Remove Stock</a>
+            </div>
+        </div>         
+      </div>   
+    
+    
 <form (submit)="saveStock(stock)">
   <label>Name</label>
   <input type="text" [(ngModel)]="stock.name">
-  <p>{{stock.name}}</p>
   
   <label>Description</label>
   <input type="text" [(ngModel)]="stock.description">
@@ -21,3 +35,4 @@
   <button type="submit">Save</button>
   <button [routerLink]="['/StockList']">Cancel</button>
 </form>
+<a [routerLink]="['StockList']">back to list</a>

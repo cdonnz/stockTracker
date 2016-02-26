@@ -29,13 +29,13 @@ console.log("data",data)
                 description: desc
             } = s;
             
-            symbol = symbol.toLowerCase();console.log("perf:",perChange)
+            symbol = symbol.toLowerCase();
             let rgb = new RGB();
             let rgbColor = rgb.getPerfColor(perChange);
 
-            if(Stocks.findOne( {name:symbol} )){console.log("update")
+            if(Stocks.findOne( {name:symbol} )){
                 Stocks.update( Stocks.findOne( { name:symbol} )['_id'], { $set: { val: val}} );  
-            }else{     console.log("not update- else")
+            }else{    
                Stocks.insert({
                     name: symbol,
                     val: val,

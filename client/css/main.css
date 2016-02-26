@@ -65,6 +65,26 @@ table {
     width:20%;
     padding:10px;
 }
+.stock .shares{
+    font-size:12px;
+    padding:10px;
+}
+.stock .sharesButton{
+    font-size:12px;
+    padding-top:3px;
+}
+.stock .sharesInput{
+    font-size:12px;
+    padding-top:3px;
+}
+.on{
+    display:block;
+}
+.off{
+    display:none;
+}
+
+
 .stock .control-column{
     width:20%;
     padding:10px;
@@ -73,6 +93,7 @@ table {
     font-size:12px;
     padding-top:3px;
 }
+
 .stock .desc{
     font-size:10px;
 }
