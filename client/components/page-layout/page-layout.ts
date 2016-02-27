@@ -1,4 +1,4 @@
-///<reference path="../../typings/angular2-meteor.d.ts" />
+///<reference path="../../../typings/angular2-meteor.d.ts" />
  
 import {Component, View} from 'angular2/core';
  
@@ -6,9 +6,9 @@ import {NgFor} from 'angular2/common';
  
 import {Stocks} from 'collections/stocks';
  
-import {StocksForm} from 'client/stock-form/stocks-form'; 
+import {StocksForm} from 'client/components/stock-form/stocks-form'; 
  
-import {Donut} from 'client/donut/donut'; 
+import {Donut} from 'client/components/donut/donut'; 
  
 import {RouterLink} from 'angular2/router';
 
@@ -16,17 +16,19 @@ import {CookieList} from 'client/helpers/cookieList';
 
 import {TickerService} from 'client/services/ticker.service';
 
+import {StockList} from 'client/components/stock-list/stock-list';
+
 
 @Component({
-    selector: 'stock-list'
+    selector: 'page-layout'
 })
    
 @View({
-    templateUrl: '/client/stock-list/stock-list.html',
-    directives: [NgFor, StocksForm, Donut, RouterLink]
+    templateUrl: '/client/components/page-layout/page-layout.html',
+    directives: [NgFor, StockList, StocksForm, Donut, RouterLink]
 })
 
-export class StockList {
+export class PageLayout {
     stocks: {};
   
     constructor(public tickers: TickerService) {

@@ -1,4 +1,4 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+///<reference path="../../../typings/angular2-meteor.d.ts" />
  
 import {Component, View} from 'angular2/core';
  
@@ -15,7 +15,7 @@ import {TickerService} from 'client/services/ticker.service';
 })
 
 @View({
-    templateUrl: '/client/stock-form/stocks-form.html'
+    templateUrl: '/client/components/stock-form/stocks-form.html'
 })
 
 export class StocksForm {

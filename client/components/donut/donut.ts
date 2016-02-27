@@ -1,4 +1,4 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
  
 import {Component, View} from 'angular2/core';
  
@@ -17,7 +17,7 @@ import {RouterLink} from 'angular2/router';
 })
 
 @View({
-  templateUrl: '/client/donut/donut.html',
+  templateUrl: '/client/components/donut/donut.html',
   directives: [RouterLink]
 })
 

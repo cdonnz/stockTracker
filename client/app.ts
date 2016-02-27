@@ -10,9 +10,9 @@ import {Stocks} from 'collections/stocks';
 
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
  
-import {StockList} from 'client/stock-list/stock-list';
+import {PageLayout} from 'client/components/page-layout/page-layout';
   
-import {StockDetails} from 'client/stock-details/stock-details';
+import {StockDetails} from 'client/components/stock-details/stock-details';
 
 import {TickerService} from 'client/services/ticker.service';
 
@@ -28,7 +28,7 @@ import {HeatService} from 'client/services/heat.service';
 })
 
 @RouteConfig([
-    { path: '/', as: 'StockList', component: StockList },
+    { path: '/', as: 'PageLayout', component: PageLayout},
     { path: '/stock/:stockId', as: 'StockDetails', component: StockDetails }
 ])
 

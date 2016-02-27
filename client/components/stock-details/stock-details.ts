@@ -1,4 +1,4 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor.d.ts" />
  
 import {Component, View} from 'angular2/core';
  
@@ -10,12 +10,13 @@ import {FORM_DIRECTIVES} from 'angular2/common';
 
 import {RouterLink} from 'angular2/router';
 
+
 @Component({
   selector: 'stock-details'
 })
 
 @View({
-  templateUrl: '/client/stock-details/stock-details.html',
+  templateUrl: '/client/components/stock-details/stock-details.html',
   directives: [RouterLink, FORM_DIRECTIVES]
 })
 
