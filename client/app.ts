@@ -16,8 +16,6 @@ import {StockDetails} from 'client/components/stock-details/stock-details';
 
 import {TickerService} from 'client/services/ticker.service';
 
-import {HeatService} from 'client/services/heat.service';
-
 @Component({
   selector: 'app'
 })
@@ -34,4 +32,4 @@ import {HeatService} from 'client/services/heat.service';
 
 class Socially {}
 
-bootstrap(Socially, [ROUTER_PROVIDERS, TickerService, HeatService, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(Socially, [ROUTER_PROVIDERS, TickerService, provide(APP_BASE_HREF, { useValue: '/' })]);
