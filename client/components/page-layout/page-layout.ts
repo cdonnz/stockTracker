@@ -28,24 +28,4 @@ import {StockList} from 'client/components/stock-list/stock-list';
     directives: [NgFor, StockList, StocksForm, Donut, RouterLink]
 })
 
-export class PageLayout {
-    stocks: {};
-  
-    constructor(public tickers: TickerService) {
-        //this.isOff = false;
-        tickers.getStockData();
-        this.stocks = Stocks.find();
-    }   
-    
-    removeStock(stock) {
-        Stocks.remove(stock._id);
-        var cList = new CookieList();
-        cList.remove(stock.name)
-    }
-    
-    addShareBut(stock){
-        console.log(">>>>addShareBut");
-        //this.isOff = true;
-    }
-
-}
+export class PageLayout {}

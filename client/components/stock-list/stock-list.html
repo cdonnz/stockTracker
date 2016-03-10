@@ -1,23 +1,14 @@
 <div>
   <ul>
-    <li class="stock" [style.backgroundColor]="stock.rgb ? stock.rgb : 'white'"  *ngFor="#stock of stocks">
+    <li class="stock" [style.backgroundColor]="stock.rgb ? stock.rgb : 'white'"  *ngFor="#stock of sList">
         <a [routerLink]="['/StockDetails', {stockId: stock._id}]">
-            <div class="ticker"> {{stock.name}} </div>
+            <div class="ticker"> {{stock.ticker}} </div>
             <div class="change">
                 <span class="desc"> change</span>
                 <span class="data"> {{stock.percentChange}} </span>
             </div>
         </a>
-        <div class="shares">
-            <!--<span class="desc"> current</span>
-            <span class="data"> {{stock.val}} </span>-->
-            <span class="sharesButton"  (click)="addShareBut(stock)">[+] Add Shares </span>
-   
-            <span class="sharesInput">
-                <input>
-                <a>Enter Shares</a>
-            </span>
-        </div> 
+        <stock-shares [stock]="stock"></stock-shares>
         <div class="control-column">
             <div class="remove">
             <a href="#" (click)="removeStock(stock)" class="remove-stock">[-] Remove Stock</a>
@@ -25,6 +16,7 @@
         </div>         
     </li>
   </ul>
+  <button (click)="showStocks()">show stock</button>
 </div>
 
     

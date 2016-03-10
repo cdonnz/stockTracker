@@ -12,6 +12,8 @@ import {TickerService} from 'client/services/ticker.service';
 
 import {RouterLink} from 'angular2/router';
 
+declare var d3: any;
+
 @Component({
   selector: 'donut'
 })
@@ -148,21 +150,20 @@ export class Donut {
     /////////////////
   
     var cList = new CookieList();
-        cListArr = cList.stockListGrab();
-        console.log(cListArr,">>")
+        var cListArr = cList.stockListGrab();
+
         tickers.getStockData();
         this.stocks = Stocks.find();
        
         
-console.log(this.stocks,"<---")
         var itemData = [];
         cListArr.forEach(function(s){
-                console.log(s,Stocks.findOne( {name:s} ));
+             
                 var sItem = Stocks.findOne( {name:s} );
                 var tempObj = {label:s, color:sItem.rgb, value: sItem.val};
                 itemData.push(tempObj);  
         });
-        console.log(itemData,'itemData')       
+            
 
         var svg = d3.select("donut").append("svg").attr("width",700).attr("height",300);
 

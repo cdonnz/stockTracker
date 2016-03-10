@@ -1,5 +1,8 @@
+declare var Cookie: any;
+
 export class CookieList {
   private sArr:string[];
+ 
   constructor() {
 
       if(Cookie.get('stocksStorage')){
