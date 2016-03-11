@@ -6,7 +6,7 @@ export class CookieList {
   constructor() {
 
       if(Cookie.get('stocksStorage')){
-          this.sArr = Cookie.get('stocksStorage').split(':');
+          this.sArr = Cookie.get('stocksStorage').split('-');
       }else{
           this.sArr = [];
       }
@@ -14,26 +14,33 @@ export class CookieList {
  
   stockListGrab(): string[] {
       if(Cookie.get('stocksStorage')){
-          return Cookie.get('stocksStorage').split(':');
+          return Cookie.get('stocksStorage').split('-');
       }else{
           return [];
       }
   }       
 
   stockListCheck(stock: string): boolean {
-    this.sArr = Cookie.get('stocksStorage').split(':');
+    this.sArr = Cookie.get('stocksStorage').split('-');
     return (this.sArr.indexOf(stock) > -1)? true : false;
   }
    
   isInside(stock: string): boolean {
-    this.sArr = Cookie.get('stocksStorage').split(':');
+    
+    if(!Cookie.get('stocksStorage')){
+      Cookie.set('stocksStorage', '');
+      return false;
+    }
+    
+    this.sArr = Cookie.get('stocksStorage').split('-');
     return (this.sArr.indexOf(stock) > -1)? true : false;
   } 
   
   insert(stock: string): void {
+
     if(!this.isInside(stock)){
 
-        var temp = Cookie.get('stocksStorage').split(':');
+        var temp = Cookie.get('stocksStorage').split('-');
 
         if(temp[0] === ''){
             this.sArr = [stock];
@@ -44,17 +51,36 @@ export class CookieList {
        if(this.sArr.length === 1){
            Cookie.set('stocksStorage', this.sArr);
         }else{
-           Cookie.set('stocksStorage', this.sArr.join(':'));
+           Cookie.set('stocksStorage', this.sArr.join('-'));
         }
     }
   }
  
   remove(stock: string): void {
-    this.sArr = Cookie.get('stocksStorage').split(':');
-    var index = this.sArr.indexOf(stock);
+    this.sArr = Cookie.get('stocksStorage').split('-');
+    let tempArr = [];
+
+    this.sArr.forEach(function(s){
+      let target = s.split(':')[0];
+      tempArr.push(target);
+    })
+    let index = tempArr.indexOf(stock);
     if(index > -1) {
-        this.sArr.splice(index, 1);
-    }
-    Cookie.set('stocksStorage', this.sArr.join(':'));
-  }   
+      this.sArr.splice(index, 1);
+    }    
+   
+    Cookie.set('stocksStorage', this.sArr.join('-'));
+  } 
+  
+  insertShares(stock: string, shares: number){
+    this.sArr = Cookie.get('stocksStorage').split('-');
+    var index = this.sArr.indexOf(stock);
+
+    if(index > -1) {
+      this.sArr.splice(index, 1, stock + ':' + shares);
+      Cookie.set('stocksStorage', this.sArr.join('-'));
+    }   
+  }
+  
+   
 }

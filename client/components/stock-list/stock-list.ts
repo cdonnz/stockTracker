@@ -30,13 +30,12 @@ import {StockShares} from 'client/components/stock-list/stock-shares';
 
 export class StockList {
     sList = [];
-    isReady = false;
     constructor() {
-      console.log(HTTP,"http",HTTP.Jsonp)
+      //console.log(HTTP,"http",HTTP.Jsonp)
        this.cList = new CookieList();
        this.grabStocks();
       /*setInterval(() => {
-        console.log("refresh")
+
         this.grabStocks();
       // zone.js tells Angular 2 to trigger Change Detection
       }, 1000);*/
@@ -45,23 +44,37 @@ export class StockList {
     grabStocks(){
       let cList = this.cList
       let cListArr = cList.stockListGrab();
-      let cListString = cListArr.join(',');
- 
-      for(var i = 0; i < cListArr.length; i++){
-        this.sList.push(new StockModel(cListArr[i]));
-      }  
+      let tempList = [];
 
-      window.cb = (data,fn) => {
+      cListArr.forEach(function(j){
+        if(j.indexOf(':')> -1){
+          let jSplit = j.split(':');
+          tempList.push(jSplit[0]);
+        }else{
+          tempList.push(j);
+        }
+      })
+
+      let cListString = tempList.join(',');
+
+      window.cb = (data) => {
         let temp = [];
  
-        fn = function(s){
+        let fn = function(s,cList){
           let symbol:string = s.ticker.toLowerCase();
           let percentChange = parseFloat(s.percentChange);
           let netChange = parseFloat(s.netChange);
+          let current = parseFloat(s.current);
+          let stockShares = 0;
           //let rgb = new RGB();
           //let rgbColor = rgb.getPerfColor(perChange);
-
-          temp.push(new StockModel(symbol,s.current,percentChange,netChange,s.description));    
+          cListArr.forEach(function(t){
+            if(t.indexOf(symbol) > -1 && t.indexOf(':') ){
+              stockShares = parseInt(t.split(':')[1]);
+            }
+          })
+          
+          temp.push(new StockModel(symbol,stockShares,current,percentChange,netChange,s.description));    
         }
         
         let d = data.quote; 
@@ -72,8 +85,8 @@ export class StockList {
         }else{
           fn(d); 
         } 
+ 
         this.sList = temp;
-        this.isReady = true;
       }    
       
       let script = document.createElement('script');
@@ -84,18 +97,13 @@ export class StockList {
     
     showStocks(){
       
-      console.log("showStocks",this.sList);
-      //this.sService.grabData();
-      //console.log(this.sService.showStocks(),".....")
-  
-      /*let sService = new StockService();
-      console.log(sService.showStocks(),'??');*/
     }
 
     
     removeStock(stock) {
       var sL = this.sList;
       let cList = this.cList;
+      
       this.sList.forEach(function(s,i){
         if(stock.ticker === s.ticker){
            sL.splice(i,1);

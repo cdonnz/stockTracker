@@ -10,6 +10,7 @@ import {StocksForm} from 'client/components/stock-form/stocks-form';
  
 import {RouterLink} from 'angular2/router';
 
+import {CookieList} from 'client/helpers/cookieList'; 
 
 @Component({
     selector: 'stock-shares'
@@ -22,7 +23,8 @@ import {RouterLink} from 'angular2/router';
 
 export class StockShares {
     @Input() stock;
-    constructor() { 
+    constructor() {
+      this.cList = new CookieList();
       this.showSharesInput = 'on';
       this.hideSharesInput = 'off';
     }   
@@ -33,10 +35,12 @@ export class StockShares {
        this.hideSharesInput = this.hideSharesInput == 'on' ? 'off': 'on';
     }
 
-    enterShares(shares){
+    enterShares(stock,shares){
       this.toggle();
+
       if(shares !== ''){
         this.stock.enterShares(shares);
+        this.cList.insertShares(stock,shares);
       }
     }
 

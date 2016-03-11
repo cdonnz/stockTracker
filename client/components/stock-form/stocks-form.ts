@@ -28,8 +28,11 @@ export class StocksForm {
         });
     }
     addStock(stock) {
+        if(stock.name === ''){return;}
+        console.log("entered",stock)
         var cList = new CookieList;
-        cList.insert(stock.name) 
+        cList.insert(stock.name);
+        return; 
         this.tickers.getStockData();
     }    
 }

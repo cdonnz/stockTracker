@@ -1,11 +1,13 @@
 <div class="shares">
-    <!--<span class="desc"> current</span>
-    <span class="data"> {{stock.val}} </span>-->
-    <span *ngIf="stock.shares > 0" >shares: {{stock.shares}}</span>
-    <span class="sharesButton" *ngIf="stock.shares == 0"  [ngClass]="showSharesInput" (click)="toggle()">[+] Add Shares </span>
+    <span class="desc" *ngIf="stock.shares > 0"> value</span>
+    <span class="data" *ngIf="stock.shares > 0"> {{stock.shares * stock.current }} </span>
+
+    <span class="sharesButton" *ngIf="!stock.shares"  [ngClass]="showSharesInput" (click)="toggle()">[+] Add Shares </span>
  
-    <span class="sharesInput" *ngIf="stock.shares == 0" [ngClass]="hideSharesInput">
+    <span class="sharesInput" *ngIf="!stock.shares" [ngClass]="hideSharesInput">
         <input #shares>
-        <a (click)="enterShares(shares.value)">Enter Shares</a>
+        <a (click)="enterShares(stock.ticker,shares.value)">Enter Shares</a>
     </span>
+   
 </div> 
+

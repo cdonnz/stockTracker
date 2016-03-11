@@ -1,12 +1,12 @@
 export class StockModel{
-  constructor(ticker,current,percentChange,netChange,description){
+  constructor(ticker,shares,current,percentChange,netChange,description){
     this.ticker = ticker;
     this.current = current;
     this.percentChange = percentChange;
     this.netChange = netChange;
     this.description = description;
     this.rgb = 'pink';
-    this.shares = 0;
+    this.shares = shares;
 }
   
   ticker:string = '';
@@ -21,7 +21,6 @@ export class StockModel{
 
   enterShares(shares){
     this.shares = shares;
-    console.log(this,"share added")
   }
  
 }

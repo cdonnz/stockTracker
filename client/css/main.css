@@ -67,6 +67,7 @@ table {
 }
 .stock .shares{
     font-size:12px;
+    width:125px;
     padding:10px 10px 0 0;
 }
 .stock .sharesButton{
@@ -96,4 +97,8 @@ table {
 
 .stock .desc{
     font-size:10px;
+}
+
+.stock .data{
+    font-size:20px;
 }
