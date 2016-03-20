@@ -1,104 +1,130 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-    font-family: arial, helvetica;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0}
+body{line-height:1;font-family:arial, helvetica}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+nav ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+a{font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0}
+ins{background-color:#ff9;color:#000;text-decoration:none}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:700}
+del{text-decoration:line-through}
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+input,select{vertical-align:middle}
 
-.stock {
-    height:40px;
-}
-.stock a:hover,.stock a:link,.stock a:visited { text-decoration: none; color:#000; }
-.stock div{
+a:link, a:visited, a:hover, a:active { color:#000; text-decoration:none; }
+
+@media(min-width:992px){
+  .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9{
     float:left;
-    color:#000;
+    position:relative;
+    min-height:1px;
+    /*padding-right:15px;
+    padding-left:15px;*/
+  }
+  .col-md-2{
+    width:16.66666667%;
+  }
+  .col-md-6{
+    width:50%;
+  }
+  .col-md-4{
+    width:33.33333333%;
+  }
 }
-.stock .ticker{
-    text-transform: uppercase;
-    width:10%;
-    padding:10px;
-    font-size:19px;
-}
-.stock .change{
-    width:20%;
-    padding:10px;
-}
-.stock .current{
-    width:20%;
-    padding:10px;
-}
-.stock .shares{
-    font-size:12px;
-    width:125px;
-    padding:10px 10px 0 0;
-}
-.stock .sharesButton{
-    font-size:12px;
-    padding-top:3px;
-}
-.stock .sharesInput{
-    font-size:12px;
+stock-list{
+  padding-bottom:10px;
+  display:block;
 }
 
+.item-col{
+  height:40px;
+}
+.ticker{
+  text-transform: uppercase;
+  padding:8px 0 0 20px;
+  font-size:25px;
+}
+.desc{
+  width:54px;
+  height:20px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.data{
+  font-size:20px;
+  width:54px;
+}
+.percent{
+  padding:5px 0 0 20px;
+  float:left;
+  width:148px;
+}
+.current{
+  padding:5px 0 0 20px;
+  float:left;
+  width:151px;
+}
+.value{
+  padding:5px 0 0 20px;
+  float:left;
+}
+.shares{
+  font-size:12px; 
+  padding:5px 8px 0 20px;
+}
+.shares .sharesInput a{
+  color:#000;
+  font-size:12px;
+}
+.shares .sharesInput input{
+  width:50px;
+  padding:5px 0 0 0;
+}
+.remove{
+  font-size:12px; 
+  padding:10px 5px 0px 0;
+  float:right;
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
 .on{
-    display:block;
+  display:block;
 }
 .off{
-    display:none;
+  display:none;
 }
 
-
-.stock .control-column{
-    width:20%;
-    padding:10px;
-}
-.stock .control-column .remove{
+@media only screen 
+and (min-device-width : 200px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) {
+  .ticker{
+    font-size:25px;
+    padding:8px 0 0 6px
+  }
+  .desc{
+    width:54px;
+    font-size: 7px;
+  }
+  .data{
     font-size:12px;
-    padding-top:3px;
-}
-
-.stock .desc{
-    font-size:10px;
-}
-
-.stock .data{
-    font-size:20px;
-}
+    width:45px;
+  }
+  .percent{
+    width:90px;
+    padding:10px 0 0 6px;
+  }
+  .current{
+    width:80px;
+    padding:10px 0 0 0px;
+  }
+  .value{
+    padding:10px 0 0 0px;
+  }
+ }

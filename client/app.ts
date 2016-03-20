@@ -16,8 +16,10 @@ import {StockDetails} from 'client/components/stock-details/stock-details';
 
 import {TickerService} from 'client/services/ticker.service';
 
+
 @Component({
-  selector: 'app'
+  selector: 'app',
+  viewProviders: [],
 })
 
 @View({
@@ -30,6 +32,11 @@ import {TickerService} from 'client/services/ticker.service';
     { path: '/stock/:stockId', as: 'StockDetails', component: StockDetails }
 ])
 
-class Socially {}
+class Socially {
+  constructor (){
+  }
+  
+  
+}
 
 bootstrap(Socially, [ROUTER_PROVIDERS, TickerService, provide(APP_BASE_HREF, { useValue: '/' })]);

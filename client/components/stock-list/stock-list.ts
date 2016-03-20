@@ -5,7 +5,7 @@ import {Component, View} from 'angular2/core';
 import {NgFor} from 'angular2/common';
 
 //import {JSONP_PROVIDERS, Jsonp} from 'angular2/http';
-//import {URLSearchParams, Jsonp} from 'angular2/http';
+//import {Jsonp} from 'angular2/http';
 
 import {Stocks} from 'collections/stocks';
  
@@ -16,8 +16,10 @@ import {RouterLink} from 'angular2/router';
 import {CookieList} from 'client/helpers/cookieList'; 
 
 import {StockModel} from 'client/services/stock-model';
+
 import {StockShares} from 'client/components/stock-list/stock-shares';
 
+declare var window: any;
 
 @Component({
     selector: 'stock-list'
@@ -29,16 +31,20 @@ import {StockShares} from 'client/components/stock-list/stock-shares';
 })
 
 export class StockList {
-    sList = [];
-    constructor() {
-      //console.log(HTTP,"http",HTTP.Jsonp)
-       this.cList = new CookieList();
-       this.grabStocks();
-      /*setInterval(() => {
+  sList = [];
 
-        this.grabStocks();
-      // zone.js tells Angular 2 to trigger Change Detection
-      }, 1000);*/
+  constructor() {
+      //console.log(HTTP,"http",HTTP.Jsonp)
+      this.cList = new CookieList();
+      this.grabStocks();
+      let counter = 0;
+      setInterval(() => {
+        if(counter%10===0){
+         // this.grabStocks();
+         // console.log("refresh");
+        }
+        counter++;
+      },1000);       
     }   
 
     grabStocks(){
@@ -58,16 +64,18 @@ export class StockList {
       let cListString = tempList.join(',');
 
       window.cb = (data) => {
+
         let temp = [];
  
-        let fn = function(s,cList){
+        let fn = function(s){
           let symbol:string = s.ticker.toLowerCase();
           let percentChange = parseFloat(s.percentChange);
           let netChange = parseFloat(s.netChange);
           let current = parseFloat(s.current);
           let stockShares = 0;
           //let rgb = new RGB();
-          //let rgbColor = rgb.getPerfColor(perChange);
+ console.log(percentChange,"LL")
+         // let rgbColor = rgb.getPerfColor(perChange);
           cListArr.forEach(function(t){
             if(t.indexOf(symbol) > -1 && t.indexOf(':') ){
               stockShares = parseInt(t.split(':')[1]);
@@ -94,17 +102,11 @@ export class StockList {
       document.getElementsByTagName('head')[0].appendChild(script);    
     };
     
-    
-    showStocks(){
-      
-    }
-
-    
     removeStock(stock) {
-      var sL = this.sList;
+      let sL = this.sList;
       let cList = this.cList;
       
-      this.sList.forEach(function(s,i){
+      sL.forEach(function(s,i){
         if(stock.ticker === s.ticker){
            sL.splice(i,1);
            cList.remove(s.ticker)
