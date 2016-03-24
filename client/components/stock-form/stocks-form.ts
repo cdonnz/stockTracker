@@ -32,7 +32,5 @@ export class StocksForm {
         console.log("entered",stock)
         var cList = new CookieList;
         cList.insert(stock.name);
-        return; 
-        this.tickers.getStockData();
     }    
 }

@@ -28,4 +28,12 @@ import {StockList} from 'client/components/stock-list/stock-list';
     directives: [NgFor, StockList, StocksForm, Donut, RouterLink]
 })
 
-export class PageLayout {}
+export class PageLayout {
+  dataset: Array<Object> = [ 
+    { key: 0, value: 5 },
+    { key: 1, value: 10 }
+  ];
+  constructor(){}
+  
+
+}

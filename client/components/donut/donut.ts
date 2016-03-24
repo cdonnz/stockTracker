@@ -8,8 +8,8 @@ import {Stocks} from 'collections/stocks';
 
 import {CookieList} from 'client/helpers/cookieList'; 
 
-import {TickerService} from 'client/services/ticker.service';
-
+//import {TickerService} from 'client/services/ticker.service';
+import {StockCollection} from 'client/services/stock-collection';
 import {RouterLink} from 'angular2/router';
 
 declare var d3: any;
@@ -24,9 +24,9 @@ declare var d3: any;
 })
 
 export class Donut {
-    stocks: Mongo.Cursor<Object>;
-    constructor(public tickers: TickerService) {
-            
+
+    //constructor(public tickers: TickerService) {
+    constructor() {        
     /////////////////
     var Donut3D={};
     
@@ -151,8 +151,8 @@ export class Donut {
   
     var cList = new CookieList();
         var cListArr = cList.stockListGrab();
-
-        tickers.getStockData();
+console.log(StockCollection.sList,"sList")
+        StockCollection.getStockData();
         this.stocks = Stocks.find();
        
         

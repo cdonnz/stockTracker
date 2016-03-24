@@ -1,6 +1,6 @@
 ///<reference path="../../../typings/angular2-meteor.d.ts" />
  
-import {Component, View} from 'angular2/core';
+import {Component, View, Input} from 'angular2/core';
  
 import {NgFor} from 'angular2/common';
 
@@ -19,10 +19,16 @@ import {StockModel} from 'client/services/stock-model';
 
 import {StockShares} from 'client/components/stock-list/stock-shares';
 
+import {PageLayout} from 'client/components/page-layout/page-layout';
+
+import {StockCollection} from 'client/services/stock-collection';
+
 declare var window: any;
 
 @Component({
-    selector: 'stock-list'
+    selector: 'stock-list',
+    //inputs: ['foo']//,
+    //directives: [PageLayout]
 })
    
 @View({
@@ -31,78 +37,31 @@ declare var window: any;
 })
 
 export class StockList {
+  @Input() graphdata;
   sList = [];
 
   constructor() {
-      //console.log(HTTP,"http",HTTP.Jsonp)
-      this.cList = new CookieList();
-      this.grabStocks();
+      
+
+      console.log(222222)
+      let sC = new StockCollection();
+      sC.grabStocks();
       let counter = 0;
       setInterval(() => {
+        console.log(this.graphdata[0].value,">>>>>>>")
         if(counter%10===0){
-         // this.grabStocks();
-         // console.log("refresh");
+         this.sList =  sC.sList;
+         sC.grabStocks();
+         console.log("refrest");
         }
         counter++;
       },1000);       
     }   
 
-    grabStocks(){
-      let cList = this.cList
-      let cListArr = cList.stockListGrab();
-      let tempList = [];
-
-      cListArr.forEach(function(j){
-        if(j.indexOf(':')> -1){
-          let jSplit = j.split(':');
-          tempList.push(jSplit[0]);
-        }else{
-          tempList.push(j);
-        }
-      })
-
-      let cListString = tempList.join(',');
-
-      window.cb = (data) => {
-
-        let temp = [];
- 
-        let fn = function(s){
-          let symbol:string = s.ticker.toLowerCase();
-          let percentChange = parseFloat(s.percentChange);
-          let netChange = parseFloat(s.netChange);
-          let current = parseFloat(s.current);
-          let stockShares = 0;
-          //let rgb = new RGB();
- console.log(percentChange,"LL")
-         // let rgbColor = rgb.getPerfColor(perChange);
-          cListArr.forEach(function(t){
-            if(t.indexOf(symbol) > -1 && t.indexOf(':') ){
-              stockShares = parseInt(t.split(':')[1]);
-            }
-          })
-          
-          temp.push(new StockModel(symbol,stockShares,current,percentChange,netChange,s.description));    
-        }
-        
-        let d = data.quote; 
-        if (Object.prototype.toString.call(d) === '[object Array]')  {
-          d.forEach(function(s){
-            fn(s);      
-          });
-        }else{
-          fn(d); 
-        } 
- 
-        this.sList = temp;
-      }    
-      
-      let script = document.createElement('script');
-      script.src  = `http://www.foxbusiness.com/ajax/quote/${cListString}?callback=cb`;
-      document.getElementsByTagName('head')[0].appendChild(script);    
-    };
+    
     
     removeStock(stock) {
+      return;
       let sL = this.sList;
       let cList = this.cList;
       
