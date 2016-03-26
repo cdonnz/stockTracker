@@ -17,6 +17,7 @@ export class StockModel{
   color:string = '';
   RGB:string = '';
   addShareBut = 'on';
+  shares:number = 0;
  
 
   enterShares(shares){

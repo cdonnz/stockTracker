@@ -45,7 +45,7 @@ export class StockCollection {
       let cList = this.cList
       let cListArr = cList.stockListGrab();
       let tempList = [];
-
+//console.log(cListArr,"cookieArr in Collection")
       cListArr.forEach(function(j){
         if(j.indexOf(':')> -1){
           let jSplit = j.split(':');
@@ -66,17 +66,16 @@ export class StockCollection {
           let percentChange = parseFloat(s.percentChange);
           let netChange = parseFloat(s.netChange);
           let current = parseFloat(s.current);
-          let stockShares = 0;
+          let shares = 0;
           //let rgb = new RGB();
- console.log(percentChange,"LL")
          // let rgbColor = rgb.getPerfColor(perChange);
           cListArr.forEach(function(t){
             if(t.indexOf(symbol) > -1 && t.indexOf(':') ){
-              stockShares = parseInt(t.split(':')[1]);
+              shares = parseInt(t.split(':')[1]);
             }
           })
-          
-          temp.push(new StockModel(symbol,stockShares,current,percentChange,netChange,s.description));    
+          shares = 0;
+          temp.push(new StockModel(symbol,shares,current,percentChange,netChange,s.description));    
         }
         
         let d = data.quote; 
@@ -87,7 +86,7 @@ export class StockCollection {
         }else{
           fn(d); 
         } 
- console.log("grab now")
+ console.log("grab now",cList.sArr)
         this.sList = temp;
       }    
       

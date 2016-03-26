@@ -12,6 +12,9 @@ import {RouterLink} from 'angular2/router';
 
 import {CookieList} from 'client/helpers/cookieList'; 
 
+import {StockService} from 'client/services/stock-service';
+
+
 @Component({
     selector: 'stock-shares'
 })
@@ -23,12 +26,10 @@ import {CookieList} from 'client/helpers/cookieList';
 
 export class StockShares {
     @Input() stock;
-    constructor() {
-      this.cList = new CookieList();
+    constructor(public stockService:StockService) {
       this.showSharesInput = 'on';
       this.hideSharesInput = 'off';
-    }   
-  
+    }
 
     toggle(){
        this.showSharesInput = this.showSharesInput == 'on' ? 'off': 'on';
@@ -39,8 +40,7 @@ export class StockShares {
       this.toggle();
 
       if(shares !== ''){
-        this.stock.enterShares(shares);
-        this.cList.insertShares(stock,shares);
+        this.stockService.enterShares(stock,shares);
       }
     }
 

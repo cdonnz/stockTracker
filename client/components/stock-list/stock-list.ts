@@ -23,6 +23,10 @@ import {PageLayout} from 'client/components/page-layout/page-layout';
 
 import {StockCollection} from 'client/services/stock-collection';
 
+import {CookieService} from 'client/services/cookie-service';
+
+import {StockService} from 'client/services/stock-service';
+
 declare var window: any;
 
 @Component({
@@ -37,41 +41,43 @@ declare var window: any;
 })
 
 export class StockList {
-  @Input() graphdata;
-  sList = [];
+  @Input() allStocks;
+  @Input() cookieList;
 
-  constructor() {
+
+  constructor(public stockService:StockService) {
+
+    let c = 0;
+    setInterval(() => {
       
-
-      console.log(222222)
-      let sC = new StockCollection();
-      sC.grabStocks();
-      let counter = 0;
-      setInterval(() => {
-        console.log(this.graphdata[0].value,">>>>>>>")
-        if(counter%10===0){
-         this.sList =  sC.sList;
-         sC.grabStocks();
-         console.log("refrest");
-        }
-        counter++;
-      },1000);       
-    }   
-
+      if(stockService.stocks.length !==0){
+        
+          this.stocks = stockService.stocks;  
+      }
+      c++;
+    },1000);
     
     
-    removeStock(stock) {
-      return;
-      let sL = this.sList;
-      let cList = this.cList;
-      
-      sL.forEach(function(s,i){
-        if(stock.ticker === s.ticker){
-           sL.splice(i,1);
-           cList.remove(s.ticker)
-        }
-      })   
-    }
+    
+  }   
+
+  removeStock(stock) {console.log("hi",stock.ticker)
+     this.stockService.removeStock(stock.ticker)
+    //console.log(stockService.stockList,"remove");
+    return;
+     this.cookieService.cList.push("G")
+    
+    let aS = this.allStocks;
+    //let cList = this.cL;
+        
+    aS.forEach(function(s,i){
+      if(stock.ticker === s.ticker){
+        aS.splice(i,1); 
+        //cList.remove(s.ticker)
+      }
+    })  
+    //console.log(cList.sArr,"after remove")
+  }
     
 
 }

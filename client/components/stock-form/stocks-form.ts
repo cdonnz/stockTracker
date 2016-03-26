@@ -1,6 +1,6 @@
 ///<reference path="../../../typings/angular2-meteor.d.ts" />
  
-import {Component, View} from 'angular2/core';
+import {Component, View, Input} from 'angular2/core';
  
 import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
  
@@ -9,6 +9,9 @@ import {Stocks} from 'collections/stocks';
 import {CookieList} from 'client/helpers/cookieList'; 
 
 import {TickerService} from 'client/services/ticker.service';
+
+import {CookieService} from 'client/services/cookie-service';
+import {StockService} from 'client/services/stock-service';
 
 @Component({
     selector: 'stocks-form'
@@ -19,18 +22,16 @@ import {TickerService} from 'client/services/ticker.service';
 })
 
 export class StocksForm {
+    @Input() flag;
     stocksForm: ControlGroup;
     
-    constructor(public tickers: TickerService) {
-        var fb = new FormBuilder();
-        this.stocksForm = fb.group({
-            name: ['']
-        });
+    constructor(public stockService:StockService) {
+      var fb = new FormBuilder();
+      this.stocksForm = fb.group({
+          name: ['']
+      });
     }
     addStock(stock) {
-        if(stock.name === ''){return;}
-        console.log("entered",stock)
-        var cList = new CookieList;
-        cList.insert(stock.name);
+      this.stockService.insertStock(stock);
     }    
 }
