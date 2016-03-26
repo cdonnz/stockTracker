@@ -12,13 +12,7 @@ import {Donut} from 'client/components/donut/donut';
  
 import {RouterLink} from 'angular2/router';
 
-import {CookieList} from 'client/helpers/cookieList'; 
-
-import {TickerService} from 'client/services/ticker.service';
-
 import {StockList} from 'client/components/stock-list/stock-list';
-
-import {StockCollection} from 'client/services/stock-collection';
 
 import {CookieService} from 'client/services/cookie-service';
 import {StockService} from 'client/services/stock-service';
@@ -51,25 +45,5 @@ export class PageLayout {
       }
       c++;
     },1000);    
-    
-    
-    
-    /*let cL = new CookieList();
-    this.cList = cL.stockListGrab();
-    let sC = new StockCollection();
-    sC.grabStocks();
-    
-    let c = 0;
-    setInterval(() => {console.log(this.cList,":pageLayout")
-      //console.log("cookie",cookieService)
-      if(c%10===0 || this.newStockFlag){
-        sC.grabStocks();
-        this.sList =  sC.sList;
-        this.newStockFlag = false;
-      }
-      c++;
-    },1000); */
   }
-  
-
 }

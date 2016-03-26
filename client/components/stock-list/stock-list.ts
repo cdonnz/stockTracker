@@ -13,15 +13,11 @@ import {StocksForm} from 'client/components/stock-form/stocks-form';
  
 import {RouterLink} from 'angular2/router';
 
-import {CookieList} from 'client/helpers/cookieList'; 
-
 import {StockModel} from 'client/services/stock-model';
 
 import {StockShares} from 'client/components/stock-list/stock-shares';
 
 import {PageLayout} from 'client/components/page-layout/page-layout';
-
-import {StockCollection} from 'client/services/stock-collection';
 
 import {CookieService} from 'client/services/cookie-service';
 
@@ -30,9 +26,7 @@ import {StockService} from 'client/services/stock-service';
 declare var window: any;
 
 @Component({
-    selector: 'stock-list',
-    //inputs: ['foo']//,
-    //directives: [PageLayout]
+    selector: 'stock-list'
 })
    
 @View({
@@ -50,34 +44,14 @@ export class StockList {
     let c = 0;
     setInterval(() => {
       
-      if(stockService.stocks.length !==0){
-        
+      if(stockService.stocks.length !==0){  
           this.stocks = stockService.stocks;  
       }
       c++;
     },1000);
-    
-    
-    
   }   
 
-  removeStock(stock) {console.log("hi",stock.ticker)
-     this.stockService.removeStock(stock.ticker)
-    //console.log(stockService.stockList,"remove");
-    return;
-     this.cookieService.cList.push("G")
-    
-    let aS = this.allStocks;
-    //let cList = this.cL;
-        
-    aS.forEach(function(s,i){
-      if(stock.ticker === s.ticker){
-        aS.splice(i,1); 
-        //cList.remove(s.ticker)
-      }
-    })  
-    //console.log(cList.sArr,"after remove")
+  removeStock(stock) {
+     this.stockService.removeStock(stock.ticker);
   }
-    
-
 }

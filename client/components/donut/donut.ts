@@ -6,10 +6,7 @@ import {RouteParams} from 'angular2/router';
 
 import {Stocks} from 'collections/stocks';
 
-import {CookieList} from 'client/helpers/cookieList'; 
 
-//import {TickerService} from 'client/services/ticker.service';
-import {StockCollection} from 'client/services/stock-collection';
 import {RouterLink} from 'angular2/router';
 
 declare var d3: any;

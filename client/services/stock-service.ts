@@ -48,7 +48,7 @@ export class StockService {
     let index = cleanArr.indexOf(s);
     if(index > -1) {
       this.stockList.splice(index, 1);
-    }        
+    } 
     this.cookieService.update(this.stockList);
     this.grabStocks();
   }

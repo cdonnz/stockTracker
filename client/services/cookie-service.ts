@@ -8,14 +8,7 @@ export class CookieService {
 
   private sArr:string[];
  
-  constructor() {
-
-     /* if(Cookie.get('stocksStorage')){
-          this.sArr = Cookie.get('stocksStorage').split('-');
-      }else{
-          this.sArr = [];
-      }*/
-  }
+  constructor() {}
   cookieGrab(){
     if(Cookie.get('stocksStorage')){
       return Cookie.get('stocksStorage').split('-');

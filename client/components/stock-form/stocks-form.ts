@@ -6,10 +6,6 @@ import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'a
  
 import {Stocks} from 'collections/stocks';
 
-import {CookieList} from 'client/helpers/cookieList'; 
-
-import {TickerService} from 'client/services/ticker.service';
-
 import {CookieService} from 'client/services/cookie-service';
 import {StockService} from 'client/services/stock-service';
 
