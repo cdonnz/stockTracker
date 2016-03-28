@@ -1,11 +1,11 @@
 export class StockModel{
-  constructor(ticker,shares,current,percentChange,netChange,description){
+  constructor(ticker,shares,current,percentChange,netChange,description,rgb){
     this.ticker = ticker;
     this.current = current;
     this.percentChange = percentChange;
     this.netChange = netChange;
     this.description = description;
-    this.rgb = 'pink';
+    this.rgb = rgb;
     this.shares = shares;
 }
   

@@ -1,5 +1,6 @@
 import {StockModel} from 'client/services/stock-model';
 import {CookieService} from 'client/services/cookie-service';
+import {RgbService} from 'client/services/rgb-service';
 
 declare var window: any;
 
@@ -7,8 +8,7 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 
 export class StockService {
-  constructor(public cookieService:CookieService){}
-  
+  constructor(public cookieService:CookieService,public rgbService:RgbService){}
   stockList = [];
   stocks = []; 
   
@@ -75,6 +75,7 @@ export class StockService {
     document.getElementsByTagName('head')[0].appendChild(script);   
     
     let stockList = this.stockList;
+    let rgbService = this.rgbService;
     window.cb = (data) => {
       let temp = [];
 
@@ -84,6 +85,7 @@ export class StockService {
         let netChange = parseFloat(s.netChange);
         let current = parseFloat(s.current);
         let shares = 0;
+        let rgb = rgbService.getPerfColor(percentChange);
 
         stockList.forEach(function(t,i){
           if(t.indexOf(symbol) > -1 && t.indexOf(':') > -1 ){
@@ -91,7 +93,7 @@ export class StockService {
           }
         })
 
-        temp.push(new StockModel(symbol,shares,current,percentChange,netChange,s.description));    
+        temp.push(new StockModel(symbol,shares,current,percentChange,netChange,s.description,rgb));    
       }
       
       let d = data.quote; 

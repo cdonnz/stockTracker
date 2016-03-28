@@ -16,6 +16,8 @@ import {StockDetails} from 'client/components/stock-details/stock-details';
 
 import {CookieService} from 'client/services/cookie-service';
 import {StockService} from 'client/services/stock-service';
+import {RgbService} from 'client/services/rgb-service';
+
 
 @Component({
   selector: 'app',
@@ -35,8 +37,6 @@ import {StockService} from 'client/services/stock-service';
 class Socially {
   constructor (){
   }
-  
-  
 }
 
-bootstrap(Socially, [ROUTER_PROVIDERS, CookieService, StockService, provide(APP_BASE_HREF, { useValue: '/' })]);
+bootstrap(Socially, [ROUTER_PROVIDERS, CookieService, StockService, RgbService, provide(APP_BASE_HREF, { useValue: '/' })]);

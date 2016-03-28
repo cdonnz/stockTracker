@@ -1,4 +1,8 @@
-export class RGB {
+import {Injectable} from 'angular2/core';
+
+@Injectable()
+
+export class RgbService {
   private sArr:string[];
   constructor() {}
   getPerfColor(val: string): string {

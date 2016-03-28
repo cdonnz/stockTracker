@@ -31,7 +31,7 @@ export class PageLayout {
 
   newStockFlag:Boolean = false;
   
-  constructor(public cookieService:CookieService,public stockService:StockService){
+  constructor(public stockService:StockService){
     
     stockService.grabStocks();
     let c = 0;

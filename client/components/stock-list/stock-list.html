@@ -1,9 +1,9 @@
 
-<div class="row"  *ngFor="#stock of stocks" style="background-color:lavenderblush;">
-  <div class="col-md-2 item-col">
+<div class="row"  *ngFor="#stock of stocks">
+  <div class="col-md-2 item-col" style="background-color:{{stock.rgb}};">
      <div  class="ticker item">{{stock.ticker}}</div> 
   </div>
-  <div class="col-md-6 item-col" style="background-color:lavender;">
+  <div class="col-md-6 item-col" style="background-color:{{stock.rgb}};">
     <div class="percent text-left" >
       <span class="desc">percent</span> 
       <span class="data"> {{stock.percentChange}}% </span>
@@ -17,7 +17,7 @@
       <span class="data" *ngIf="stock.shares > 0"> {{(stock.shares * stock.current).toFixed(2) }} </span>
     </div>
   </div>
-  <div class="col-md-4 item-col" style="background-color:lavenderblush;">
+  <div class="col-md-4 item-col" style="background-color:{{stock.rgb}};">
     <div class="shares fl">
        <stock-shares [stock]="stock"></stock-shares>
     </div>

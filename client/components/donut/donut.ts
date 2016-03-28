@@ -5,7 +5,7 @@ import {Component, View} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 
 import {Stocks} from 'collections/stocks';
-
+import {StockService} from 'client/services/stock-service';
 
 import {RouterLink} from 'angular2/router';
 
@@ -23,7 +23,7 @@ declare var d3: any;
 export class Donut {
 
     //constructor(public tickers: TickerService) {
-    constructor() {        
+    constructor(public stockService:StockService) {        
     /////////////////
     var Donut3D={};
     
@@ -145,39 +145,50 @@ export class Donut {
         .text(function(d){return d.data.label});      
     }  
     /////////////////
-  
-    var cList = new CookieList();
+
+   /* var cList = new CookieList();
         var cListArr = cList.stockListGrab();
 console.log(StockCollection.sList,"sList")
         StockCollection.getStockData();
         this.stocks = Stocks.find();
        
+        stockService.stocks
+        var itemData = [];*/
+
+          let c = 0;
+          setInterval(() => {
+            let stocks = stockService.stocks;
+            //console.log(stocks.length,c,"donut")  
+            process(stockService.stocks);
+            c++;
+          },1000);  
+      
+       function process(){
+          let stocks = stockService.stocks;
+          let itemDataArr = [];          
+          stocks.forEach(function(s){
+             let tempObj = {label:s.ticker, color:s.rgb, value: s.current};
+             itemDataArr.push(tempObj);
+          })
+         
+          var svg = d3.select("donut").append("svg").attr("width",700).attr("height",300);
+
+          svg.append("g").attr("id","salesDonut");
+          svg.append("g").attr("id","quotesDonut");
+
+          Donut3D.draw("salesDonut", randomData(), 150, 150, 130, 100, 30, 0.4);
+
+          function changeData(){
+          Donut3D.transition("salesDonut", randomData(), 130, 100, 30, 0.4);
+          }
+
+          function randomData(){
+              return itemDataArr.map(function(d){ 
+                  return {label:d.label, value:d.value, color:d.color};
+              });
+          }
         
-        var itemData = [];
-        cListArr.forEach(function(s){
-             
-                var sItem = Stocks.findOne( {name:s} );
-                var tempObj = {label:s, color:sItem.rgb, value: sItem.val};
-                itemData.push(tempObj);  
-        });
-            
-
-        var svg = d3.select("donut").append("svg").attr("width",700).attr("height",300);
-
-        svg.append("g").attr("id","salesDonut");
-        svg.append("g").attr("id","quotesDonut");
-
-        Donut3D.draw("salesDonut", randomData(), 150, 150, 130, 100, 30, 0.4);
-
-        function changeData(){
-        Donut3D.transition("salesDonut", randomData(), 130, 100, 30, 0.4);
-        }
-
-        function randomData(){
-            return itemData.map(function(d){ console.log('d',d.value.replace(/,/g,''));
-                return {label:d.label, value:d.value.replace(/,/g,''), color:d.color};
-            });
-        }
+       }
    
     }
     saveStock(stock) {
